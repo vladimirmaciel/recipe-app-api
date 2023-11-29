@@ -83,13 +83,13 @@ DATABASES = {
     }
 }
 
-# Debug: Imprimir valores das variáveis de ambiente
-print("DB_HOST:", os.environ.get('DB_HOST'))
-print("DB_NAME:", os.environ.get('DB_NAME'))
-print("DB_USER:", os.environ.get('DB_USER'))
-print("DB_PASSWD:", os.environ.get('DB_PASS'))
-print("DB_PORT:", os.environ.get('DB_PORT'))
-print("DB_PORT_DB:", os.environ.get('DB_PORT_BD'))
+# # Debug: Imprimir valores das variáveis de ambiente
+# print("DB_HOST:", os.environ.get('DB_HOST'))
+# print("DB_NAME:", os.environ.get('DB_NAME'))
+# print("DB_USER:", os.environ.get('DB_USER'))
+# print("DB_PASSWD:", os.environ.get('DB_PASS'))
+# print("DB_PORT:", os.environ.get('DB_PORT'))
+# print("DB_PORT_DB:", os.environ.get('DB_PORT_BD'))
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

@@ -13,16 +13,15 @@ services:
     command: >
       sh -c "python manage.py runserver 0.0.0.0:8000"
     environment:
-      - DEV
-      - DB_HOST
-      - DB_NAME
-      - DB_USER
-      - DB_PASS
-      - DB_PORT
-    env_file: .env
+      - DB_HOST=db
+      - DB_NAME=devdb
+      - DB_USER=devuser
+      - DB_PASS=changeme
+      - DB_PORT=5432
+      - DEV=true
     depends_on:
       - db
-  
+
   db:
     image: postgres:13-alpine
     environment:
@@ -30,7 +29,7 @@ services:
         - POSTGRES_USER=${DB_USER}
         - POSTGRES_PASSWORD=${DB_PASS}
     ports:
-      - "${DB_PORT_BD}:${DB_PORT}"
+      - "5435:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
