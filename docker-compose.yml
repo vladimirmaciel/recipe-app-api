@@ -19,21 +19,20 @@ services:
       - DB_NAME=devdb
       - DB_USER=devuser
       - DB_PASS=changeme
-      - DB_PORT=5432
     depends_on:
       - db
 
   db:
     image: postgres:13-alpine
+    volumes:
+      - dev-db-data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=${DB_NAME}
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_DB=devdb
+      - POSTGRES_USER=devuser
+      - POSTGRES_PASSWORD=changeme
+
     ports:
       - "5435:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
 
 volumes:
-  postgres_data:
-
+  dev-db-data:
