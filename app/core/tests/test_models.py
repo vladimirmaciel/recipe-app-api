@@ -5,6 +5,7 @@ Tests for models.
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 
+
 class ModelTests(TestCase):
     """Test model class"""
 
@@ -17,5 +18,34 @@ class ModelTests(TestCase):
             password=password
         )
         self.assertEqual(user.email, email)
-        self.assertEqual(user.password, password)
+        # self.assertEqual(user.password, password)
         self.assertTrue(user.check_password(password))
+
+    def test_new_user_email_normalized(self):
+        """Test the email for a new user is normalized"""
+        sample_emails = [
+            ['test1@EXAMPLE.com', 'test1@example.com'],
+            ['Test2@example.com', 'Test2@example.com'],
+            ['TEST3@EXAMPLE.COM', 'TEST3@example.com'],
+            ['test4@example.com', 'test4@example.com'],
+        ]
+        for email, expected in sample_emails:
+            user = get_user_model().objects.create_user(email, 'test123')
+            self.assertEqual(user.email, expected)
+
+    def test_new_user_without_email(self):
+        """ user email is required """
+
+        with self.assertRaises(ValueError):
+            get_user_model().objects.create_user(None, 'test123')
+
+    def test_create_superuser(self):
+        User = get_user_model()
+        superuser = User.objects.create_superuser(
+            email='admin@example.com',
+            password='senha_supersecreta'
+        )
+
+        self.assertTrue(superuser.is_superuser)
+        self.assertTrue(superuser.is_staff)
+        self.assertEqual(superuser.email, 'admin@example.com')
